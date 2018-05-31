@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: black;
+    width: 60vw;
+    height: 10em;
+    color: white;
+    margin: auto;
+    padding: 1em;
+    border-bottom-left-radius: 2em;
+    border-bottom-right-radius: 2em;
+}

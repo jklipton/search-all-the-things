@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Status from './Status';
 import Articles from './Articles';
 import Search from './Search';
 import { loadAll, search } from '../../services/dogApi';
+import './App.css';
 
 export default class App extends Component {
 
@@ -31,13 +33,9 @@ export default class App extends Component {
     return (
       <main>
         <header>
-              I am a header, search here.
-              breed and subbreed drop down
-              YOUR CURRENT SEARCH IS VISIBLE HERE, COUNT
-              VIEW PAGE NUMBER CLICK TO NEXT PAGE, DISABLE
+          <Status />
+          <Search onSearch={this.handleSearch}/>
         </header>
-
-        <Search onSearch={this.handleSearch}/>
 
         <Articles images={images}
                   perPage= {perPage}/>
