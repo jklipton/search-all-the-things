@@ -33,3 +33,19 @@ h1{
 h1:hover{
     transform: scale(1.1);
 }
+
+@media (max-width: 850px) { 
+    header{
+        width: 45vw;
+        right: calc((100vw - 45vw)/2);
+    }
+}
+
+@media (max-width: 650px) { 
+
+    header{
+        width: 95vw;
+        right: 1vw;
+        padding:.5em;
+    }
+}

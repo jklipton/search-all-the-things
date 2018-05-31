@@ -35,3 +35,10 @@
     border: none;
     line-height: 1.2em;
 }
+
+@media (max-width: 650px) { 
+
+    .styled-select select{
+        font-size: .8em;
+    }
+}
