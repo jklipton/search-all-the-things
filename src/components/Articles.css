@@ -19,6 +19,12 @@
   text-align: center;
 }
 
+.intro {
+  background: rgb(56, 56, 56);
+  border-radius: 50vw;
+  color: white;
+}
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
