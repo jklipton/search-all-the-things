@@ -46,7 +46,7 @@ p img {
 }
 
 .wide:first-child{
-  height: 1em;
+  height: 1vh;
 }
 
 .gif{
@@ -78,7 +78,7 @@ p img {
   }
 
   .wide:first-child{
-    height: 3em;
+    height: 2vh;
   }
 
   p img {
@@ -101,7 +101,7 @@ p img {
 
   .loading p:first-child {
    font-size: 1.8em;
-   width: 90%;
+    width: 90%;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);

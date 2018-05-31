@@ -47,6 +47,7 @@ export default class App extends Component {
 
     return (
       <main>
+        <div id="header-holder">
         <header>
           <h1>REACT2DOGS</h1>
           <Search onSearch={this.handleSearch}/>
@@ -55,6 +56,7 @@ export default class App extends Component {
                   page={page}
                   onPage={this.handlePage}/>
         </header>
+        </div>
 
         <Articles images={images}
                   perPage= {perPage}

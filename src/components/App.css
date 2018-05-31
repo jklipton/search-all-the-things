@@ -11,6 +11,13 @@ html, body {
     background: #acacac;
 }
 
+#header-holder{
+    width: 100vw;
+    height: fit-content;
+    position: fixed;
+    top: 0px;
+}
+
 header {
     background-color: black;
     width: 35vw;
@@ -19,8 +26,7 @@ header {
     padding: 1em;
     border-bottom-left-radius: 2em;
     border-bottom-right-radius: 2em;
-    position: fixed;
-    right: calc((100vw - 35vw)/2);
+    margin: auto;
 }
 
 h1{
@@ -37,7 +43,6 @@ h1:hover{
 @media (max-width: 850px) { 
     header{
         width: 45vw;
-        right: calc((100vw - 45vw)/2);
     }
 }
 
