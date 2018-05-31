@@ -3,17 +3,15 @@ import './Articles.css';
 
 export default class Articles extends Component {
 
+  state = {
+    lastImage: 0,
+  }
 
   render() {
+    const { lastImage } = this.state;
     const { images, perPage } = this.props;
-    
-    function loadImages(array) {
-      for (let i=0; i < perPage; i++){
-        imageHTML(array[i])
-      };
-    };
 
-    const articles = images.slice(0, perPage).map((image) => {
+    const articles = images.slice(lastImage, perPage).map((image) => {
             return <p><img src={image} /></p>
     });
 

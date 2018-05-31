@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { loadAll } from '../../services/dogApi';
+import { loadBreeds, loadSubBreeds } from '../../services/dogApi';
 
 export default class Search extends Component {
 
     state = {
-        breeds: [],
-        search: '',
+        breedList: [],
+        subBreedList: [],
+        breed: '',
+        subBreed: '',
         loaded: false,
     };
 
-    handleLoad = () => {
+    handleFirstLoad = () => {
         if (!this.state.loaded) {
-            loadAll().then(({ message }) => {
-                this.setState({ breeds: Object.keys(message),
+            loadBreeds().then(({ message }) => {
+                this.setState({ breedList: Object.keys(message),
                                 loaded: true
                             });
                         });
@@ -21,22 +23,43 @@ export default class Search extends Component {
 
     handleBreedSearch = ({ target }) => {
         this.setState(
-            { search: target.value }, 
+            { breed: target.value, subBreed: null }, 
             () => {
                 event.preventDefault();
-                this.props.onSearch(this.state.search);
+                this.props.onSearch(this.state.breed, null);
+                this.handleSubLoad(this.state.breed);
             });
-      };
+    };
+
+    handleSubLoad = (breed) => {
+        loadSubBreeds(breed).then(({ message }) => {
+            this.setState({ subBreedList: message });
+        });
+    };
+
+    handleSubBreedSearch = ({ target }) => {
+        this.setState(
+            { subBreed: target.value }, 
+            () => {
+                event.preventDefault();
+                this.props.onSearch(this.state.breed, this.state.subBreed);
+            });
+    };
 
     render() {
-        const { breeds } = this.state;
-        this.handleLoad();
+        const { breedList, subBreedList } = this.state;
+        this.handleFirstLoad();
       
       return (
         <div id="breed-select">
-            <select onChange={event => this.handleBreedSearch(event)}>
+            <select id="breed" onChange={event => this.handleBreedSearch(event)}>
                 <option selected disabled>Search by breed</option>
-                {breeds.map(breed => <option key={breed}>{breed}</option>)}
+                {breedList.map(breed => <option key={breed}>{breed}</option>)}
+            </select>
+            <select id="subbreed" onChange={event => this.handleSubBreedSearch(event)}>
+                <option selected disabled>subbreed</option>
+                <option value=''>all</option>
+                {subBreedList.map(breed => <option key={breed}>{breed}</option>)}
             </select>
         </div>
       );

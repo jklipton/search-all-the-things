@@ -1,44 +1,62 @@
 import React, { Component } from 'react';
-import Status from './Status';
+import Paging  from './Paging';
 import Articles from './Articles';
 import Search from './Search';
-import { loadAll, search } from '../../services/dogApi';
+import { searchByBreed, searchBySubBreed } from '../../services/dogApi';
 import './App.css';
 
 export default class App extends Component {
 
   state = {
     breed: null,
+    subBreed: null,
     loading: false,
     perPage: 20,
+    page: 1,
     images: [],
+    results: null,
   };
 
-  handleSearch = ( search ) => {
-    this.setState({ breed: search }, this.searchBreed);
+  handleSearch = ( breed, subBreed ) => {
+    this.setState({ breed: breed, subBreed: subBreed }, this.search);
   };
 
-  searchBreed = () => {
-    const { breed } = this.state;
+  search = () => {
+    const { breed, subBreed } = this.state;
     this.setState({ loading: true });
-    console.log( 'search by:', breed );
 
-    search(breed).then(({ message }) => {this.setState({ images: message });});
+    console.log( 'search by:', breed, subBreed);
+
+    if (this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
+    else searchByBreed(breed).then(({ message }) => {this.setState({ images: message }, this.setCount);});
   };
+
+  setCount = () => {
+    this.setState({ results: this.state.images.length });
+  };
+
+  handlePage = ({ page }) => {
+    this.setState({ page }, this.search);
+  };
+
 
   render() {
 
-    const { breeds, images, perPage } = this.state;
+    const { images, perPage, page, results } = this.state;
 
     return (
       <main>
         <header>
-          <Status />
+          <Paging results={results}
+                  perPage={perPage}
+                  page={page}
+                  onPage={this.handlePage}/>
           <Search onSearch={this.handleSearch}/>
         </header>
 
         <Articles images={images}
-                  perPage= {perPage}/>
+                  perPage= {perPage}
+                  page= {page}/>
 
         <article>
               I am the article.  SEARCH SOMEThinG!
