@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { loadBreeds, loadSubBreeds } from '../../services/dogApi';
+import './Search.css';
 
 export default class Search extends Component {
 
@@ -52,15 +53,19 @@ export default class Search extends Component {
       
       return (
         <div id="breed-select">
+            <div className="styled-select">
             <select id="breed" onChange={event => this.handleBreedSearch(event)}>
                 <option selected disabled>Search by breed</option>
                 {breedList.map(breed => <option key={breed}>{breed}</option>)}
             </select>
+            </div>
+            <div className="styled-select">
             <select id="subbreed" onChange={event => this.handleSubBreedSearch(event)}>
                 <option selected disabled>subbreed</option>
                 <option value=''>all</option>
                 {subBreedList.map(breed => <option key={breed}>{breed}</option>)}
             </select>
+            </div>
         </div>
       );
     }

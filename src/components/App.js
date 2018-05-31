@@ -32,7 +32,8 @@ export default class App extends Component {
   };
 
   setCount = () => {
-    this.setState({ results: this.state.images.length });
+    this.setState({ results: this.state.images.length,
+                    loading: false});
   };
 
   handlePage = ({ page }) => {
@@ -42,26 +43,24 @@ export default class App extends Component {
 
   render() {
 
-    const { images, perPage, page, results } = this.state;
+    const { images, perPage, page, results, lastImage, loading } = this.state;
 
     return (
       <main>
         <header>
+          <h1>REACT2DOGS</h1>
+          <Search onSearch={this.handleSearch}/>
           <Paging results={results}
                   perPage={perPage}
                   page={page}
                   onPage={this.handlePage}/>
-          <Search onSearch={this.handleSearch}/>
         </header>
 
         <Articles images={images}
                   perPage= {perPage}
-                  page= {page}/>
+                  page= {page}
+                  loading= {loading}/>
 
-        <article>
-              I am the article.  SEARCH SOMEThinG!
-              I HAVE A LOADING INDICATOR
-        </article>
       </main>
     );
   }

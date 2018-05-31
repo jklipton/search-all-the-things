@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Boogaloo|Open+Sans');
+
 #dog-images{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.show {
   align-items: flex-start;
   align-content: flex-start;
+}
+
+.intro, .loading {
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
 
 p {
@@ -17,4 +30,30 @@ p img {
   margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-  
+
+.intro p:first-child {
+  width: 100%;
+}
+
+.gif{
+  width: 20vw;
+  height: 15vw;
+  background-size: cover;
+  border: 5px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.loading .gif{
+  width: 50vw;
+  height: 40vw;
+}
+
+.loading p:first-child {
+  color: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

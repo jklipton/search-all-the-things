@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Paging.css';
 
 export default class Paging extends Component {
 
@@ -11,14 +12,11 @@ export default class Paging extends Component {
 
         const { page, perPage, results } = this.props;
 
-        if (results === null) return (
-            <section class="paging" id="welcome">
-            Hello!  You like dogs?  We got dogs?  Choose your favorite breed from the dropdown menu below.
-            </section>
-        )
+        if (results === null) return <section className="paging"> </section>
+        
 
         if (results === 0) return (
-            <section class="paging">
+            <section className="paging">
             0 results found =(, try another breed!
             </section>
         )
@@ -26,10 +24,9 @@ export default class Paging extends Component {
         const totalPages = Math.ceil(results / perPage);
     
         return (
-            <section class="paging">
-                <span> Page {page} of {totalPages}</span>
-        &nbsp;
+            <section className="paging">
         <button onClick={() => this.handlePage(-1)} disabled={page === 1}>&lt; Prev</button>
+                <span> Page {page} of {totalPages}</span>
         <button onClick={() => this.handlePage(+1)} disabled={page === totalPages}>Next &gt;</button>
             </section>
         );
