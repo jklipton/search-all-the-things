@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Paging  from './Paging';
-import Articles from './Articles';
-import Search from './Search';
-import { searchByBreed, searchBySubBreed } from '../../services/dogApi';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
+import Home from './Home';
+import Header from './Header';
 
 export default class App extends Component {
 
@@ -46,24 +45,18 @@ export default class App extends Component {
     const { images, perPage, page, results, lastImage, loading } = this.state;
 
     return (
-      <main>
-        <div id="header-holder">
-        <header>
-          <h1>REACT2DOGS</h1>
-          <Search onSearch={this.handleSearch}/>
-          <Paging results={results}
-                  perPage={perPage}
-                  page={page}
-                  onPage={this.handlePage}/>
-        </header>
+      <Router>
+        <div>
+          <Header />
+          <main>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route path="/search" component={Search}/>
+              <Redirect to="/"/>
+            </Switch>
+          </main>
         </div>
-
-        <Articles images={images}
-                  perPage= {perPage}
-                  page= {page}
-                  loading= {loading}/>
-
-      </main>
+      </Router>
     );
   }
 }

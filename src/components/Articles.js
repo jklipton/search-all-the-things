@@ -40,14 +40,6 @@ export default class Articles extends Component {
     </section>
     )
 
-    if (images.length === 0) return (
-      <section id="dog-images" className="intro">
-        <p className="wide"></p>
-        <p className="wide"><h2>Hey, you like dogs?  We got dogs!</h2> Choose your favorite breed from the dropdown menu!</p>
-        {gifs.map(gif => <p className="gif" style={{ backgroundImage: `url(${gif})` }}></p>)}
-      </section>
-    )
-
     return <section id="dog-images" className="show">{articles}</section>;
   }
 }
