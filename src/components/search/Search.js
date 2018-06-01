@@ -15,9 +15,10 @@ export default class Search extends Component {
   };
 
   state = {
-    movies: null,
+    images: [],
     error: null,
-    searchTerm: ''
+    breed: '',
+    subBreed: '',
   };
 
   componentDidMount() {
@@ -45,7 +46,7 @@ export default class Search extends Component {
       });
   }
 
-  handleSearch = searchTerm => {
+  handleSearch = (breed, subBreed) => {
     this.setState({ error: null });
     
     this.props.history.push({
@@ -54,13 +55,11 @@ export default class Search extends Component {
   };
   
   render() {
-    const { movies, error, searchTerm } = this.state;
+    const { breed, subBreed } = this.state;
 
     return (
-      <div>
-        <SearchForm searchTerm={searchTerm} onSearch={this.handleSearch}/>
-        {error && <div>{error}</div>}
-        {(!error && movies) && <Movies movies={movies}/>}
+      <div id="search">
+        <SearchForm breed={breed} subBreed={subBreed} onSearch={this.handleSearch}/>
       </div>
     );
   }
