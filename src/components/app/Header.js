@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
+import SearchForm from '../search/SearchForm';
+
 
 export default class Header extends Component {
   render() {
@@ -11,7 +13,7 @@ export default class Header extends Component {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/search">Search</Link></li>
-              <Route path="/movies" render={() => <li>only on movies!</li>}/>
+              <Route path="/search" component={SearchForm}/>
             </ul>
           </nav>
         </div>

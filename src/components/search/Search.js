@@ -1,75 +1,67 @@
 import React, { Component } from 'react';
-import { loadBreeds, loadSubBreeds } from '../../services/dogApi';
-import './Search.css';
+import Dogs from '../dogs/Dogs';
+import SearchForm from '../search/SearchForm';
+import { searchByBreed, searchBySubBreed } from '../../../services/dogApi';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
+
+const getSearch = location => location ? location.search : '';
 
 export default class Search extends Component {
+  
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+  };
 
-    state = {
-      breedList: [],
-      subBreedList: [],
-      breed: '',
-      subBreed: '',
-      loaded: false,
-    };
+  state = {
+    movies: null,
+    error: null,
+    searchTerm: ''
+  };
 
-    handleFirstLoad = () => {
-      if(!this.state.loaded) {
-        loadBreeds().then(({ message }) => {
-          this.setState({ breedList: Object.keys(message),
-            loaded: true
-          });
-        });
-      }
-    };
+  componentDidMount() {
+    this.searchFromQuery(this.props.location.search);
+  }
 
-    handleBreedSearch = ({ target }) => {
-      this.setState(
-        { breed: target.value, subBreed: null }, 
-        () => {
-          event.preventDefault();
-          this.props.onSearch(this.state.breed, null);
-          this.handleSubLoad(this.state.breed);
-        });
-    };
+  static getDerivedStateFromProps({ location }) {
+    const next = getSearch(location);
+    const current = getSearch(this.props.location);
+    if(current === next) return;
+    this.searchFromQuery(next);
+  }
+  
+  searchFromQuery(query) {
+    const { search: searchTerm } = queryString.parse(query);
+    this.setState({ searchTerm });
+    if(!searchTerm) return;
 
-    handleSubLoad = (breed) => {
-      loadSubBreeds(breed).then(({ message }) => {
-        this.setState({ subBreedList: message });
+    search(searchTerm)
+      .then(({ Search }) => {
+        this.setState({ movies: Search });
+      })
+      .catch(error => {
+        this.setState({ error });
       });
-    };
+  }
 
-    handleSubBreedSearch = ({ target }) => {
-      this.setState(
-        { subBreed: target.value }, 
-        () => {
-          event.preventDefault();
-          this.props.onSearch(this.state.breed, this.state.subBreed);
-        });
-    };
+  handleSearch = searchTerm => {
+    this.setState({ error: null });
+    
+    this.props.history.push({
+      search: searchTerm ? queryString.stringify({ search: searchTerm }) : ''
+    });
+  };
+  
+  render() {
+    const { movies, error, searchTerm } = this.state;
 
-
-
-
-    render() {
-      const { breedList, subBreedList } = this.state;
-      this.handleFirstLoad();
-      
-      return (
-        <div id="breed-select">
-          <div className="styled-select">
-            <select id="breed" onChange={event => this.handleBreedSearch(event)}>
-              <option selected disabled>Search by breed</option>
-              {breedList.map(breed => <option key={breed}>{breed}</option>)}
-            </select>
-          </div>
-          <div className="styled-select">
-            <select id="subbreed" onChange={event => this.handleSubBreedSearch(event)}>
-              <option selected disabled>subbreed</option>
-              <option value=''>all</option>
-              {subBreedList.map(breed => <option key={breed}>{breed}</option>)}
-            </select>
-          </div>
-        </div>
-      );
-    }
+    return (
+      <div>
+        <SearchForm searchTerm={searchTerm} onSearch={this.handleSearch}/>
+        {error && <div>{error}</div>}
+        {(!error && movies) && <Movies movies={movies}/>}
+      </div>
+    );
+  }
 }
