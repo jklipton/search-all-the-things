@@ -6,14 +6,14 @@ export default class Header extends Component {
     return (
       <header>
         <div id="header-container">
-       <h1>REACT2DOGS</h1>
-           <nav>
-           <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/search">Search</Link></li>
-                <Route path="/movies" render={() => <li>only on movies!</li>}/>
-        </ul>
-        </nav>
+          <h1>REACT2DOGS</h1>
+          <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/search">Search</Link></li>
+              <Route path="/movies" render={() => <li>only on movies!</li>}/>
+            </ul>
+          </nav>
         </div>
       </header>
     );

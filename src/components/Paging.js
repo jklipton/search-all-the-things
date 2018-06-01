@@ -3,32 +3,32 @@ import './Paging.css';
 
 export default class Paging extends Component {
 
-    handlePage(increment) {
-        const { page, onPage } = this.props;
-        onPage({ page: page + increment });
-      }
+  handlePage(increment) {
+    const { page, onPage } = this.props;
+    onPage({ page: page + increment });
+  }
 
-    render() {
+  render() {
 
-        const { page, perPage, results } = this.props;
+    const { page, perPage, results } = this.props;
 
-        if (results === null) return <section className="paging"> </section>
+    if(results === null) return <section className="paging"> </section>;;
         
 
-        if (results === 0) return (
-            <section className="paging">
+    if(results === 0) return (
+      <section className="paging">
             0 results found =(, try another breed!
-            </section>
-        )
+      </section>
+    );;
 
-        const totalPages = Math.ceil(results / perPage);
+    const totalPages = Math.ceil(results / perPage);
     
-        return (
-            <section className="paging">
+    return (
+      <section className="paging">
         <button onClick={() => this.handlePage(-1)} disabled={page === 1}>&lt; Prev</button>
-                <span> Page {page} of {totalPages}</span>
+        <span> Page {page} of {totalPages}</span>
         <button onClick={() => this.handlePage(+1)} disabled={page === totalPages}>Next &gt;</button>
-            </section>
-        );
-      }
-    }
+      </section>
+    );
+  }
+}

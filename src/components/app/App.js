@@ -16,28 +16,28 @@ export default class App extends Component {
     results: null,
   };
 
-  handleSearch = ( breed, subBreed ) => {
-    this.setState({ breed: breed, subBreed: subBreed }, this.search);
-  };
+  // handleSearch = (breed, subBreed) => {
+  //   this.setState({ breed: breed, subBreed: subBreed }, this.search);
+  // };
 
-  search = () => {
-    const { breed, subBreed } = this.state;
-    this.setState({ loading: true });
+  // search = () => {
+  //   const { breed, subBreed } = this.state;
+  //   this.setState({ loading: true });
 
-    console.log( 'search by:', breed, subBreed);
+  //   console.log('search by:', breed, subBreed);
 
-    if (this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
-    else searchByBreed(breed).then(({ message }) => {this.setState({ images: message }, this.setCount);});
-  };
+  //   if(this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
+  //   else searchByBreed(breed).then(({ message }) => {this.setState({ images: message }, this.setCount);});
+  // };
 
-  setCount = () => {
-    this.setState({ results: this.state.images.length,
-                    loading: false});
-  };
+  // setCount = () => {
+  //   this.setState({ results: this.state.images.length,
+  //     loading: false  });
+  // };
 
-  handlePage = ({ page }) => {
-    this.setState({ page }, this.search);
-  };
+  // handlePage = ({ page }) => {
+  //   this.setState({ page }, this.search);
+  // };
 
 
   render() {
