@@ -17,7 +17,7 @@ export default class App extends Component {
     results: null,
   };
 
-  handleSearch = ( breed, subBreed ) => {
+  handleSearch = (breed, subBreed) => {
     this.setState({ breed: breed, subBreed: subBreed }, this.search);
   };
 
@@ -25,15 +25,15 @@ export default class App extends Component {
     const { breed, subBreed } = this.state;
     this.setState({ loading: true });
 
-    console.log( 'search by:', breed, subBreed);
+    console.log('search by:', breed, subBreed);
 
-    if (this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
+    if(this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
     else searchByBreed(breed).then(({ message }) => {this.setState({ images: message }, this.setCount);});
   };
 
   setCount = () => {
     this.setState({ results: this.state.images.length,
-                    loading: false});
+      loading: false  });
   };
 
   handlePage = ({ page }) => {
@@ -48,20 +48,20 @@ export default class App extends Component {
     return (
       <main>
         <div id="header-holder">
-        <header>
-          <h1>REACT2DOGS</h1>
-          <Search onSearch={this.handleSearch}/>
-          <Paging results={results}
-                  perPage={perPage}
-                  page={page}
-                  onPage={this.handlePage}/>
-        </header>
+          <header>
+            <h1>REACT2DOGS</h1>
+            <Search onSearch={this.handleSearch}/>
+            <Paging results={results}
+              perPage={perPage}
+              page={page}
+              onPage={this.handlePage}/>
+          </header>
         </div>
 
         <Articles images={images}
-                  perPage= {perPage}
-                  page= {page}
-                  loading= {loading}/>
+          perPage= {perPage}
+          page= {page}
+          loading= {loading}/>
 
       </main>
     );
