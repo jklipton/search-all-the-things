@@ -7,23 +7,19 @@ export default class Search extends Component {
 
     static propTypes = {
       breed: PropTypes.string,
-      subBreed: PropTypes.string,
       onSearch: PropTypes.func.isRequired
     };
 
-    static getDerivedStateFromProps({ breed, subBreed }) {
-      if(breed !== this.state.currentBreed || subBreed !== this.state.currentSubBreed) {
-        this.setState({ currentBreed: breed || '', subBreed: breed || ''  });
-      }
-    }
-
     state = {
-      breedList: [],
-      subBreedList: [],
-      currentBreed: this.props.breed || '',
-      currentSubBreed: this.props.subBreed || '',
+      current: this.props.breed || '',
       loaded: false,
     };
+
+    UNSAFE_componentWillReceiveProps({ breed }) {
+      if(breed !== this.state.current) {
+        this.setState({ current: breed });
+      }
+    }
 
     handleFirstLoad = () => {
       if(!this.state.loaded) {
@@ -40,50 +36,51 @@ export default class Search extends Component {
         { currentBreed: target.value, currentSubBreed: null }, 
         () => {
           this.callSearch();
-          this.handleSubLoad(this.state.currentBreed);
+          // this.handleSubLoad(this.state.currentBreed);
         });
     };
 
-    handleSubLoad = (breed) => {
-      loadSubBreeds(breed).then(({ message }) => {
-        this.setState({ subBreedList: message });
-      });
-    };
+    // handleSubLoad = (breed) => {
+    //   loadSubBreeds(breed).then(({ message }) => {
+    //     this.setState({ subBreedList: message });
+    //   });
+    // };
 
-    handleSubBreedSearch = ({ target }) => {
-      this.setState(
-        { currentSubBreed: target.value }, 
-        () => {
-          this.callSearch();
-        });
-    };
+    // handleSubBreedSearch = ({ target }) => {
+    //   this.setState(
+    //     { currentSubBreed: target.value }, 
+    //     () => {
+    //       this.callSearch();
+    //     });
+    // };
 
     callSearch() {
-      const { currentBreed, currentSubBreed } = this.state;
-      if(!currentBreed) return;
-      this.props.onSearch(currentBreed, currentSubBreed);
+      const { current } = this.state;
+      if(!current) return;
+      this.props.onSearch(current);
     }
 
     render() {
-      const { breedList, subBreedList } = this.state;
+      const { breedList } = this.state;
       this.handleFirstLoad();
       
       return (
         <div id="breed-select">
           <div className="styled-select">
-            <select id="breed" onChange={event => this.handleBreed(event)}>
+          Search for Dogs : <select id="breed" onChange={event => this.handleBreed(event)}>
               <option selected disabled>Search by breed</option>
               {breedList.map(breed => <option key={breed}>{breed}</option>)}
-            </select>
-          </div>
-          <div className="styled-select">
-            <select id="subbreed" onChange={event => this.handleSubBreed(event)}>
-              <option selected disabled>subbreed</option>
-              <option value=''>all</option>
-              {subBreedList.map(breed => <option key={breed}>{breed}</option>)}
             </select>
           </div>
         </div>
       );
     }
 }
+
+{/* <div className="styled-select">
+<select id="subbreed" onChange={event => this.handleSubBreed(event)}>
+  <option selected disabled>subbreed</option>
+  <option value=''>all</option>
+  {subBreedList.map(breed => <option key={breed}>{breed}</option>)}
+</select>
+</div> */}

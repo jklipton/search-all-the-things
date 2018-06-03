@@ -14,6 +14,9 @@ export default class Header extends Component {
               <li><Link to="/">Home</Link></li>
               <li><Link to="/search">Search</Link></li>
               <Route path="/search" component={SearchForm}/>
+              <Route path="/search/" render={({ match, history }) => {
+                return <SearchForm imdbID={match.params.id} history={history}/>;
+              }}/>
             </ul>
           </nav>
         </div>

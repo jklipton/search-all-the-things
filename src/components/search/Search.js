@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Dogs from '../dogs/Dogs';
 import SearchForm from '../search/SearchForm';
 import { searchByBreed, searchBySubBreed } from '../../../services/dogApi';
 import PropTypes from 'prop-types';
@@ -18,14 +17,13 @@ export default class Search extends Component {
     images: [],
     error: null,
     breed: '',
-    subBreed: '',
   };
 
   componentDidMount() {
     this.searchFromQuery(this.props.location.search);
   }
 
-  static getDerivedStateFromProps({ location }) {
+  UNSAFE_componentWillReceiveProps({ location }) {
     const next = getSearch(location);
     const current = getSearch(this.props.location);
     if(current === next) return;
@@ -33,33 +31,37 @@ export default class Search extends Component {
   }
   
   searchFromQuery(query) {
-    const { search: searchTerm } = queryString.parse(query);
-    this.setState({ searchTerm });
-    if(!searchTerm) return;
+    const { search: breed } = queryString.parse(query);
+    this.setState({ breed });
+    if(!breed) return;
 
-    search(searchTerm)
-      .then(({ Search }) => {
-        this.setState({ movies: Search });
+    searchByBreed(breed)
+      .then(({ message }) => {
+        this.setState({ images: message });
       })
       .catch(error => {
         this.setState({ error });
       });
   }
 
-  handleSearch = (breed, subBreed) => {
+  handleSearch = (breed) => {
     this.setState({ error: null });
+    // const searchString = {
+    //   breed: breed,
+    //   subBreed: subBreed
+    // };
     
     this.props.history.push({
-      search: searchTerm ? queryString.stringify({ search: searchTerm }) : ''
+      search: breed ? queryString.stringify({ search: breed }) : ''
     });
   };
   
   render() {
-    const { breed, subBreed } = this.state;
+    const { breed } = this.state;
 
     return (
       <div id="search">
-        <SearchForm breed={breed} subBreed={subBreed} onSearch={this.handleSearch}/>
+        <SearchForm breed={breed} onSearch={this.handleSearch}/>
       </div>
     );
   }
