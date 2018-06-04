@@ -25,8 +25,6 @@ export default class App extends Component {
     const { breed, subBreed } = this.state;
     this.setState({ loading: true });
 
-    console.log('search by:', breed, subBreed);
-
     if(this.state.subBreed) searchBySubBreed(breed, subBreed).then(({ message }) => {this.setState({ images: message }, this.setCount); });
     else searchByBreed(breed).then(({ message }) => {this.setState({ images: message }, this.setCount);});
   };
@@ -43,7 +41,7 @@ export default class App extends Component {
 
   render() {
 
-    const { images, perPage, page, results, lastImage, loading } = this.state;
+    const { images, perPage, page, results, loading } = this.state;
 
     return (
       <main>

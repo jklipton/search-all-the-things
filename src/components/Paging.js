@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import './Paging.css';
+import PropTypes from 'prop-types';
 
 export default class Paging extends Component {
+
+  static propTypes = {
+    page: PropTypes.number,
+    onPage: PropTypes.func.isRequired,
+    perPage: PropTypes.number,
+    results: PropTypes.any,
+  };
 
   handlePage(increment) {
     const { page, onPage } = this.props;

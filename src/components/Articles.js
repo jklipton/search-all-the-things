@@ -8,8 +8,16 @@ import hotdogs from '../images/hotdogs.gif';
 import puppies from '../images/puppies.gif';
 import inu from '../images/inu.gif';
 import mops from '../images/mops.gif';
+import PropTypes from 'prop-types';
 
 export default class Articles extends Component {
+
+  static propTypes = {
+    images: PropTypes.any,
+    perPage: PropTypes.number,
+    page: PropTypes.number,
+    loading: PropTypes.bool
+  };
 
   state = {
     gifs: [pom, pugs, corgis, ewok, hotdogs, puppies, inu, mops]
@@ -29,8 +37,8 @@ export default class Articles extends Component {
 
     const lastImage = perPage * (page - 1);
 
-    const articles = images.slice(lastImage, (lastImage + perPage)).map((image) => {
-      return <p><img src={image} /></p>;
+    const articles = images.slice(lastImage, (lastImage + perPage)).map((image, index) => {
+      return <p key={index}><img src={image} /></p>;
     });
 
     if(loading) return (
@@ -44,7 +52,7 @@ export default class Articles extends Component {
       <section id="dog-images" className="intro">
         <p className="wide"></p>
         <p className="wide"><h2>Hey, you like dogs?  We got dogs!</h2> Choose your favorite breed from the dropdown menu!</p>
-        {gifs.map(gif => <p className="gif" style={{ backgroundImage: `url(${gif})` }}></p>)}
+        {gifs.map((gif, index) => <p key={index} className="gif" style={{ backgroundImage: `url(${gif})` }}></p>)}
       </section>
     );
 
