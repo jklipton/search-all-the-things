@@ -8,7 +8,7 @@ export default class Loading extends Component {
     return (
       <div id="dog-images" className="loading"> 
         <p>Loading... One second!</p>
-        <p className="gif" style={{ backgroundImage: `url(${this.shuffle(gifs)[0]})` }}></p>
+        {/* <p className="gif" style={{ backgroundImage: `url(${this.shuffle(gifs)[0]})` }}></p> */}
       </div>
     );
   }
