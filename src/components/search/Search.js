@@ -35,7 +35,7 @@ export default class Search extends Component {
   }
   
   searchFromQuery(query) {
-    const { breed, location } = queryString.parse(query);
+    const { breed, location } = queryString.parse(query.search);
     this.setState({ breed, location });
     if(!breed || !location) return;
 

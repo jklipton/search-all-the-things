@@ -4,6 +4,7 @@ import './App.css';
 import Home from './Home';
 import Header from './Header';
 import Dogs from '../dogs/Dogs';
+import DogDetail from '../dogs/DogDetail';
 
 export default class App extends Component {
 
@@ -31,9 +32,9 @@ export default class App extends Component {
               <Route path="/search" render={() => {
                 return <Dogs dogs={dogs} error={error} loading={loading}/>;
               }}/>
-              {/* <Route path="/search/:id" render={({ match, history }) => {
-                return <MovieDetail imdbID={match.params.id} history={history}/>;
-              }}/> */}
+              <Route path="/dogs/:id" render={({ match, history }) => {
+                return <DogDetail dogID={match.params.id} history={history}/>;
+              }}/>
               <Redirect to="/"/>
             </Switch>
           </main>

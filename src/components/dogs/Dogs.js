@@ -19,6 +19,7 @@ export default class Dogs extends Component {
         {error && <div>{error}</div>}
         {(!error && loading) && <Loading />}
         {(!error && dogs) && dogs.map(dog => <Dog data={dog}/>)}
+        {(!error && !dogs && !loading) && <p>No doggos found :(</p>}
       </section>
     );
   }

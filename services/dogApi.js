@@ -15,3 +15,7 @@ export function loadBreeds() {
 export function searchByBreed(breed, location) {
   return get(`${BYBREED_URL}&breed=${breed}&location=${location}`);
 }
+
+export function getDog(id) {
+  return get(`${BASE_URL}/pet.get?format=json&key=${API_KEY}&id=${id}`);
+}
