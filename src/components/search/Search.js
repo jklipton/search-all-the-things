@@ -17,7 +17,6 @@ export default class Search extends Component {
   state = {
     dogs: [],
     breedList: [],
-    formLoaded: false,
     error: null,
     breed: '',
     zip: null,
@@ -25,6 +24,13 @@ export default class Search extends Component {
 
   componentDidMount() {
     this.searchFromQuery(this.props.location);
+
+    loadBreeds().then(({ petfinder }) => {
+      const results = petfinder.breeds.breed.map((item) => {
+        return item.$t;
+      });
+      this.setState({ breedList: results});
+    });
   }
 
   UNSAFE_componentWillReceiveProps({ location }) {
@@ -56,19 +62,6 @@ export default class Search extends Component {
       });
   }
 
-  handleFirstLoad = () => {
-    if(!this.state.formLoaded) {
-      loadBreeds().then(({ petfinder }) => {
-        const results = petfinder.breeds.breed.map((item) => {
-          return item.$t;
-        });
-        this.setState({ breedList: results,
-          formLoaded: true
-        });
-      });
-    }
-  };
-
   handleBreed = ({ target }) => {
     this.setState({ breed: target.value });
   };
@@ -94,7 +87,6 @@ export default class Search extends Component {
   render() {
 
     const { breedList, zip } = this.state;
-    this.handleFirstLoad();
 
     return (
       <form onSubmit={this.handleSearch}>

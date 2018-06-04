@@ -8,7 +8,6 @@
     "start": "webpack-dev-server --hot --mode development",
     "test": "jest",
     "test:watch": "npm run test -- --watch"
-
   },
   "author": "Jen",
   "license": "MIT",
@@ -45,6 +44,7 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "eslint-config-postcss": "^3.0.1",
     "fetch-jsonp": "^1.1.3",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
