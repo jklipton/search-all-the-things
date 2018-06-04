@@ -38,10 +38,10 @@ export default class DogDetail extends Component {
     let photo = null;
     let breeds = null;
     if(dog){ 
-      photo = this.parsePhoto(dog.media);
+      photo = dog.media[0] ? this.parsePhoto(dog.media).$t : null;
       const isArray = dog.breeds.breed[0];
       breeds = isArray ? (
-        dog.breeds.breed.map(breed => `${breed.$t} |`)
+        dog.breeds.breed.map(breed => `${breed.$t},`)
       ) : (
         dog.breeds.breed.$t
       );
@@ -53,7 +53,7 @@ export default class DogDetail extends Component {
       <article>
         <div className={styles.detail}>
           {/* <a href="" onClick={this.handleBack}>Back</a> */}
-          <img src={photo.$t}/>
+          <img src={photo}/>
           <h2>{dog.name.$t}</h2>
           <p>Age : {dog.age.$t} | Size: {dog.size.$t} | Sex: {dog.sex.$t}</p>
           <p>

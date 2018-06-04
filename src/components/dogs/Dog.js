@@ -20,11 +20,13 @@ export default class Dog extends Component {
     const { data } = this.props;
     const { id, name, media } = data;
     const bigPhoto = this.parsePhoto(media);
+    let photo;
+    if(bigPhoto) photo = bigPhoto.$t;
 
     return (
       <p>
         <Link to={`/dogs/${id.$t}`}> 
-          <img src={bigPhoto.$t} />
+          <img src={photo} />
           <span className="dog-name">{name.$t}</span>
         </Link>
       </p>

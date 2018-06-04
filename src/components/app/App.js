@@ -29,8 +29,8 @@ export default class App extends Component {
           <main>
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/search" render={() => {
-                return <Dogs dogs={dogs} error={error} loading={loading}/>;
+              <Route path="/search" render={({ location }) => {
+                return <Dogs dogs={dogs} error={error} loading={loading} location={location}/>;
               }}/>
               <Route path="/dogs/:id" render={({ match, history }) => {
                 return <DogDetail dogID={match.params.id} history={history}/>;

@@ -10,6 +10,7 @@ export default class Dogs extends Component {
     dogs: PropTypes.array,
     error: PropTypes.object,
     loading: PropTypes.bool,
+    location: PropTypes.object.isRequired,
   };
 
   render() {
