@@ -36,7 +36,16 @@ export default class DogDetail extends Component {
   render() {
     const { dog } = this.state;
     let photo = null;
-    if(dog) photo = this.parsePhoto(dog.media);
+    let breeds = null;
+    if(dog){ 
+      photo = this.parsePhoto(dog.media);
+      const isArray = dog.breeds.breed[0];
+      breeds = isArray ? (
+        dog.breeds.breed.map(breed => `${breed.$t} |`)
+      ) : (
+        dog.breeds.breed.$t
+      );
+    }
 
     if(dog === null) return null;
 
@@ -48,7 +57,7 @@ export default class DogDetail extends Component {
           <h2>{dog.name.$t}</h2>
           <p>Age : {dog.age.$t} | Size: {dog.size.$t} | Sex: {dog.sex.$t}</p>
           <p>
-            Breeds : {dog.breeds.breed.map(breed => `${breed.$t} |`)}
+            Breeds : {breeds}
           </p>
           <p> Location: {dog.contact.state.$t}, {dog.contact.zip.$t} </p>
           <p>

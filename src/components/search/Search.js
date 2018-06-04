@@ -35,7 +35,9 @@ export default class Search extends Component {
   }
   
   searchFromQuery(query) {
-    const { breed, location } = queryString.parse(query.search);
+    let search = query;
+    if(typeof query.search === 'string') search = query.search;
+    const { breed, location } = queryString.parse(search);
     this.setState({ breed, location });
     if(!breed || !location) return;
 
@@ -85,7 +87,7 @@ export default class Search extends Component {
     };
     
     this.props.history.push({
-      search: breed ? queryString.stringify(searchString) : ''
+      search: searchString ? queryString.stringify(searchString) : ''
     });
   };
   
