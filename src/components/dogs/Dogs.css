@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     justify-content: center;
     height: 100vh;
-    padding: 1em;
+    padding: 15em 1em;
     box-sizing: border-box;
       
     p{
@@ -29,5 +29,36 @@
     font-size: 2em;
     }
 
+    #dog-images{
+        display: flex;
+        width: 50vw;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 100vh;
+        padding: 1em;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+    #dog-images p:first-child {
+        color: white;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 3em;
+        position: absolute;
+        width: 90%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+      }
+    
+    #dog-images .gif {
+        width: 50vw;
+        height: 40vw;
+        background-size: cover;
+        border: 5px solid #000000;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        z-index: 1;
+    }
 
 }

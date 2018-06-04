@@ -19,18 +19,16 @@ export default class Search extends Component {
     breedList: [],
     error: null,
     breed: '',
+    age: null,
     zip: null,
   };
 
-  componentDidMount() {
+  componentWillMount() {
     this.searchFromQuery(this.props.location);
-
-    loadBreeds().then(({ petfinder }) => {
-      const results = petfinder.breeds.breed.map((item) => {
-        return item.$t;
-      });
-      this.setState({ breedList: results});
+    loadBreeds().then((body) => {
+      this.setState({ breedList: body});
     });
+
   }
 
   UNSAFE_componentWillReceiveProps({ location }) {
@@ -43,13 +41,13 @@ export default class Search extends Component {
   searchFromQuery(query) {
     let search = query;
     if(typeof query.search === 'string') search = query.search;
-    const { breed, location } = queryString.parse(search);
-    this.setState({ breed, location });
+    const { breed, location, age } = queryString.parse(search);
+    this.setState({ breed, location, age });
     if(!breed || !location) return;
 
     this.props.onSearch([], null, true);
 
-    searchByBreed(breed, location)
+    searchByBreed(breed, location, age)
       .then(({ petfinder }) => {
         const results = petfinder.pets.pet;
         this.setState({ dogs: results });
@@ -70,6 +68,10 @@ export default class Search extends Component {
     this.setState({ zip: target.value });
   };
 
+  handleAge = ({ target }) => {
+    this.setState({ age: target.value });
+  };
+
   handleSearch = () => {
     event.preventDefault();
     this.setState({ error: null });
@@ -78,6 +80,8 @@ export default class Search extends Component {
       breed: this.state.breed,
       location: this.state.zip
     };
+
+    if(this.state.age) searchString.age = this.state.age;
     
     this.props.history.push({
       search: searchString ? queryString.stringify(searchString) : ''
@@ -86,13 +90,27 @@ export default class Search extends Component {
   
   render() {
 
-    const { breedList, zip } = this.state;
+    const { breedList, zip, age } = this.state;
 
     return (
       <form onSubmit={this.handleSearch}>
-        <label htmlFor="zipcode"> Zipcode:</label>
-        <input id="zipcode" type="text" placeholder="Zipcode" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
+        <fieldset>
+          <label htmlFor="zipcode"> Zipcode:</label>
+          <input id="zipcode" type="text" placeholder="Zipcode" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
+          <label htmlfor="age"> Dog Age: </label>
+          <div className="styled-select">
+            <select id="age" onChange={event => this.handleAge(event)}>
+              <option selected disabled>Age</option>
+              <option value="Baby">Puppy</option>
+              <option value="Young">Young</option>
+              <option value="Adult">Adult</option>
+              <option value="Senior">Senior</option>
+              <option value="">All</option>
+            </select>
+          </div>
+        </fieldset>
         <div className="styled-select">
+          <label htmlfor="breed"> Choose Breed: </label>
           <select id="breed" onChange={event => this.handleBreed(event)} required>
             <option selected disabled>Breed</option>
             {breedList.map(breed => <option key={breed}>{breed}</option>)}

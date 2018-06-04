@@ -20,7 +20,7 @@ export default class Dogs extends Component {
       <section id="content" className={styles.dogs}>
         {error && <div>{error}</div>}
         {(!error && loading) && <Loading />}
-        {(!error && dogs) && dogs.map(dog => <Dog key={dog.id.$t} data={dog}/>)}
+        {(!error && !loading && dogs) && dogs.map(dog => <Dog key={dog.id.$t} data={dog}/>)}
         {(!error && !dogs && !loading) && <p>No doggos found :(</p>}
       </section>
     );

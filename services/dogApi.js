@@ -9,11 +9,16 @@ const get = url => fetchJsonp(url)
   .then(r => r.ok ? r.json() : r.json().then(throwJson));
 
 export function loadBreeds() {
-  return get(`${BASE_URL}/breed.list?format=json&animal=dog&key=${API_KEY}`);
+  return get(`${BASE_URL}/breed.list?format=json&animal=dog&key=${API_KEY}`).then(({ petfinder }) => {
+    return petfinder.breeds.breed.map((item) => {
+      return item.$t;
+    });
+  });
 }
 
-export function searchByBreed(breed, location) {
-  return get(`${BYBREED_URL}&breed=${breed}&location=${location}`);
+export function searchByBreed(breed, location, age) {
+  return age ? get(`${BYBREED_URL}&breed=${breed}&location=${location}&age=${age}`) :
+  get(`${BYBREED_URL}&breed=${breed}&location=${location}`)
 }
 
 export function getDog(id) {

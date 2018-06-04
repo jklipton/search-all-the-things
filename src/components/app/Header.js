@@ -16,8 +16,8 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header>
-        <div id="header-container">
+      <div id="header-holder">
+        <header>
           <h1>REACT2DOGS</h1>
           <nav className={styles.nav}>
             <Link to="/">Home</Link> | <Link to="/search">Search</Link>
@@ -25,17 +25,8 @@ export default class Header extends Component {
               return <Search onSearch={this.passFromSearch} history={history} location={location}/>;
             }}/>
           </nav>
-        </div>
-      </header>
+        </header>
+      </div>
     );
   }
 }
-
-{/* <header>
-<h1></h1>
-<Search onSearch={this.handleSearch}/>
-<Paging results={results}
-        perPage={perPage}
-        page={page}
-        onPage={this.handlePage}/>
-</header> */}
