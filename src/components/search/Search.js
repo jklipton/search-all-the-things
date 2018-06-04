@@ -10,7 +10,8 @@ export default class Search extends Component {
   
   static propTypes = {
     history: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    passSearch: PropTypes.func.isRequired
   };
 
   state = {
@@ -41,6 +42,9 @@ export default class Search extends Component {
       })
       .catch(error => {
         this.setState({ error });
+      })
+      .then(() => {
+        this.props.passSearch(this.state.images, this.state.error);
       });
   }
 

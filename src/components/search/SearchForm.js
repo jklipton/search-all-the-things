@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { loadBreeds, loadSubBreeds } from '../../../services/dogApi';
 import './Search.css';
 
-export default class Search extends Component {
+export default class SearchForm extends Component {
 
     static propTypes = {
       breed: PropTypes.string,
@@ -13,6 +13,7 @@ export default class Search extends Component {
     state = {
       current: this.props.breed || '',
       loaded: false,
+      breedList: [],
     };
 
     UNSAFE_componentWillReceiveProps({ breed }) {
@@ -33,7 +34,7 @@ export default class Search extends Component {
 
     handleBreed = ({ target }) => {
       this.setState(
-        { currentBreed: target.value, currentSubBreed: null }, 
+        { current: target.value }, 
         () => {
           this.callSearch();
           // this.handleSubLoad(this.state.currentBreed);
@@ -67,7 +68,7 @@ export default class Search extends Component {
       return (
         <div id="breed-select">
           <div className="styled-select">
-          Search for Dogs : <select id="breed" onChange={event => this.handleBreed(event)}>
+            <select id="breed" onChange={event => this.handleBreed(event)}>
               <option selected disabled>Search by breed</option>
               {breedList.map(breed => <option key={breed}>{breed}</option>)}
             </select>

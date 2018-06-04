@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import SearchForm from '../search/SearchForm';
+import SearchNew from '../search/SearchNew';
 
 
 export default class Header extends Component {
@@ -13,10 +13,10 @@ export default class Header extends Component {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/search">Search</Link></li>
-              <Route path="/search" component={SearchForm}/>
-              <Route path="/search/" render={({ match, history }) => {
-                return <SearchForm imdbID={match.params.id} history={history}/>;
-              }}/>
+              <Route path="/search" component={SearchNew}/>
+              {/* <Route path="/search" render={() => {
+                return <Search images={images} error={error}/>;
+              }}/> */}
             </ul>
           </nav>
         </div>
