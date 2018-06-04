@@ -59,7 +59,7 @@ export default class Search extends Component {
   handleFirstLoad = () => {
     if(!this.state.formLoaded) {
       loadBreeds().then(({ petfinder }) => {
-        const results = petfinder.breeds.breed.map( (item) => {
+        const results = petfinder.breeds.breed.map((item) => {
           return item.$t;
         });
         this.setState({ breedList: results,
@@ -98,16 +98,16 @@ export default class Search extends Component {
 
     return (
       <form onSubmit={this.handleSearch}>
-        <label for="zipcode"> Enter your zipcode:
-          <input id="loc" type="text" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
-        </label>
+        <label htmlFor="zipcode"> Zipcode:</label>
+        <input id="zipcode" type="text" placeholder="Zipcode" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
         <div className="styled-select">
           <select id="breed" onChange={event => this.handleBreed(event)} required>
-            <option selected disabled>Search by breed</option>
+            <option selected disabled>Breed</option>
             {breedList.map(breed => <option key={breed}>{breed}</option>)}
           </select>
-          </div>
-          <button>Search</button>
+        </div>
+        <br/>
+        <button>Search</button>
       </form>
     );
   }

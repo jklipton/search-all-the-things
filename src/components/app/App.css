@@ -20,8 +20,7 @@ html, body {
 
 header {
     background-color: black;
-    width: 35vw;
-    height: 15em;
+    width: fit-content;
     color: white;
     padding: 1em;
     border-bottom-left-radius: 2em;
@@ -33,11 +32,6 @@ h1{
     font-family: 'Boogaloo', cursive;
     text-align: center;
     margin: 0;
-    transition: all .2s ease-in-out;
-}
-
-h1:hover{
-    transform: scale(1.1);
 }
 
 @media (max-width: 850px) { 

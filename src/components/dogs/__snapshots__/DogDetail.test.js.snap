@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DogDetail renders as designed 1`] = `""`;
+
+exports[`DogDetail renders with id as designed 1`] = `""`;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dog from './Dog';
 import Loading from './Loading';
+import styles from './Dogs.css';
 
 export default class Dogs extends Component {
   
@@ -15,10 +16,10 @@ export default class Dogs extends Component {
     const { dogs, error, loading } = this.props;
 
     return (
-      <section id="content">
+      <section id="content" className={styles.dogs}>
         {error && <div>{error}</div>}
         {(!error && loading) && <Loading />}
-        {(!error && dogs) && dogs.map(dog => <Dog data={dog}/>)}
+        {(!error && dogs) && dogs.map(dog => <Dog key={dog.id.$t} data={dog}/>)}
         {(!error && !dogs && !loading) && <p>No doggos found :(</p>}
       </section>
     );

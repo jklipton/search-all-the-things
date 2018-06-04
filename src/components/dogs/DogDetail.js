@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getDog } from '../../../services/dogApi';
-import { Link } from 'react-router-dom';
+import styles from './DogDetail.css';
 
 export default class DogDetail extends Component {
 
@@ -51,7 +51,7 @@ export default class DogDetail extends Component {
 
     return (
       <article>
-        <div className="container">
+        <div className={styles.detail}>
           {/* <a href="" onClick={this.handleBack}>Back</a> */}
           <img src={photo.$t}/>
           <h2>{dog.name.$t}</h2>

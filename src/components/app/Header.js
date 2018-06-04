@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import Search from '../search/Search';
 import PropTypes from 'prop-types';
+import styles from './Header.css';
 
 export default class Header extends Component {
 
@@ -18,14 +19,11 @@ export default class Header extends Component {
       <header>
         <div id="header-container">
           <h1>REACT2DOGS</h1>
-          <nav>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/search">Search</Link></li>
-              <Route path="/search" render={({ location, history }) => {
-                return <Search onSearch={this.passFromSearch} history={history} location={location}/>;
-              }}/>
-            </ul>
+          <nav className={styles.nav}>
+            <Link to="/">Home</Link> | <Link to="/search">Search</Link>
+            <Route path="/search" render={({ location, history }) => {
+              return <Search onSearch={this.passFromSearch} history={history} location={location}/>;
+            }}/>
           </nav>
         </div>
       </header>

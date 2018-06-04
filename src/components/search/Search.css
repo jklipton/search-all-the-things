@@ -36,6 +36,21 @@
     line-height: 1.2em;
 }
 
+form label {
+    display: none;
+}
+
+form input {
+    background-color: rgba(240, 248, 255, 0.226);
+    border: 0px;
+    border-bottom: 2px solid rgb(160, 48, 48);
+    width: 5em;
+    padding: .3em;
+    text-transform: uppercase;
+    color: white;
+    border-radius: .2em;
+}
+
 @media (max-width: 650px) { 
 
     .styled-select select{
