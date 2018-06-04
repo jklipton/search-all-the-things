@@ -8,25 +8,28 @@ import Dogs from '../dogs/Dogs';
 export default class App extends Component {
 
   state = {
+    dogs: [],
+    error: null,
+    loading: false,
   };
 
-  passSearch= (images, error) => {
-    this.setState({ images: images, error: error });
+  passFromHeader = (dogs, error, loading) => {
+    this.setState({ dogs: dogs, error: error, loading: loading });
   };
 
   render() {
 
-    const { images, error } = this.state;
+    const { dogs, error, loading } = this.state;
 
     return (
       <Router>
         <div>
-          <Header />
+          <Header passToApp={this.passFromHeader}/>
           <main>
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/search" render={() => {
-                return <Dogs images={images} error={error}/>;
+                return <Dogs dogs={dogs} error={error} loading={loading}/>;
               }}/>
               {/* <Route path="/search/:id" render={({ match, history }) => {
                 return <MovieDetail imdbID={match.params.id} history={history}/>;

@@ -5,23 +5,21 @@ import { Link } from 'react-router-dom';
 export default class Dog extends Component {
   
   static propTypes = {
-    imdbID: PropTypes.string,
-    Poster: PropTypes.string,
-    Title: PropTypes.string,
-    Year: PropTypes.string,
+    data: PropTypes.object
   };
 
   render() {
-    const { imdbID, Poster, Title, Year } = this.props;
+    const { data } = this.props;
+    const { id, name, media.photos.photo: photos } = data;
+    const bigPhoto = photos
 
     return (
-      <li>
-        <Link to={`/movies/${imdbID}`}>
-          <img alt={Title} src={Poster}/>
-          <h3>{Title}</h3>
-          <p>Released {Year}</p>
+      <p>
+        <Link to={`/dogs/${id}`}> 
+          <img src={image} />
+          <span className="dog-name">{name}</span>
         </Link>
-      </li>
+      </p>
     );
   }
 }

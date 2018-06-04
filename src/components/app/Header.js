@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import SearchNew from '../search/SearchNew';
-
+import Search from '../search/Search';
+import PropTypes from 'prop-types';
 
 export default class Header extends Component {
+
+  static propTypes = {
+    passToApp: PropTypes.func.isRequired,
+  };
+
+  passFromSearch = (dogs, error, loading) => {
+    this.props.passToApp(dogs, error, loading);
+  };
+
   render() {
     return (
       <header>
@@ -13,10 +22,9 @@ export default class Header extends Component {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/search">Search</Link></li>
-              <Route path="/search" component={SearchNew}/>
-              {/* <Route path="/search" render={() => {
-                return <Search images={images} error={error}/>;
-              }}/> */}
+              <Route path="/search" render={({ location, history }) => {
+                return <Search onSearch={this.passFromSearch} history={history} location={location}/>;
+              }}/>
             </ul>
           </nav>
         </div>
