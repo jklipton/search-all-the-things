@@ -11,7 +11,7 @@ export default class DogDetail extends Component {
   };
 
   state = {
-    dog: ''
+    dog: null
   };
 
   componentDidMount() {
