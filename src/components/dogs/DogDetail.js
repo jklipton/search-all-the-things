@@ -38,7 +38,7 @@ export default class DogDetail extends Component {
     let photo = null;
     let breeds = null;
     if(dog){ 
-      photo = dog.media[0] ? this.parsePhoto(dog.media).$t : null;
+      photo = dog.media.photos ? this.parsePhoto(dog.media).$t : null;
       const isArray = dog.breeds.breed[0];
       breeds = isArray ? (
         dog.breeds.breed.map(breed => `${breed.$t},`)
