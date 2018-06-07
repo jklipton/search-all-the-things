@@ -18,7 +18,7 @@ export function loadBreeds() {
 
 export function searchByBreed(breed, location, age) {
   return age ? get(`${BYBREED_URL}&breed=${breed}&location=${location}&age=${age}`) :
-  get(`${BYBREED_URL}&breed=${breed}&location=${location}`)
+    get(`${BYBREED_URL}&breed=${breed}&location=${location}`);
 }
 
 export function getDog(id) {

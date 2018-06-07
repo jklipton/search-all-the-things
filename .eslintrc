@@ -19,8 +19,7 @@
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "eslint-config-postcss"
+    "plugin:react/recommended"
   ],
   "rules": {
       "no-console": "warn",

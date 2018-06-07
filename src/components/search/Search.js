@@ -23,10 +23,10 @@ export default class Search extends Component {
     zip: null,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.searchFromQuery(this.props.location);
     loadBreeds().then((body) => {
-      this.setState({ breedList: body});
+      this.setState({ breedList: body  });
     });
 
   }
@@ -90,7 +90,7 @@ export default class Search extends Component {
   
   render() {
 
-    const { breedList, zip, age } = this.state;
+    const { breedList, zip } = this.state;
 
     return (
       <form onSubmit={this.handleSearch}>
@@ -98,7 +98,7 @@ export default class Search extends Component {
           <label htmlFor="zipcode"> Zipcode:</label>
           <input id="zipcode" type="text" placeholder="Zipcode" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
           <div className="styled-select">
-            <label htmlfor="age"> Dog Age: </label>
+            <label htmlFor="age"> Dog Age: </label>
             <select id="age" onChange={event => this.handleAge(event)}>
               <option selected disabled>Age</option>
               <option value="Baby">Puppy</option>
@@ -110,7 +110,7 @@ export default class Search extends Component {
           </div>
         </fieldset>
         <div className="styled-select">
-          <label htmlfor="breed"> Choose Breed: </label>
+          <label htmlFor="breed"> Choose Breed: </label>
           <select id="breed" onChange={event => this.handleBreed(event)} required>
             <option selected disabled>Breed</option>
             {breedList.map(breed => <option key={breed}>{breed}</option>)}
