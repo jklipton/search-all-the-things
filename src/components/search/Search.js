@@ -97,8 +97,8 @@ export default class Search extends Component {
         <fieldset>
           <label htmlFor="zipcode"> Zipcode:</label>
           <input id="zipcode" type="text" placeholder="Zipcode" pattern="[0-9]{5}" value={zip} onChange={event => this.handleZip(event)} required />
-          <label htmlfor="age"> Dog Age: </label>
           <div className="styled-select">
+            <label htmlfor="age"> Dog Age: </label>
             <select id="age" onChange={event => this.handleAge(event)}>
               <option selected disabled>Age</option>
               <option value="Baby">Puppy</option>

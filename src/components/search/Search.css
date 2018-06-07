@@ -6,7 +6,6 @@
 .styled-select{
     padding: .2em;
     border-radius: .2em;
-    overflow: hidden;
     background: rgb(160, 48, 48);
     display: inline-block;
     margin: .2em;
@@ -31,7 +30,6 @@
     outline: none;
     background: rgb(160, 48, 48);
     border: none;
-    line-height: 1.2em;
 }
 
 form label {
@@ -46,7 +44,7 @@ form input, form input:focus {
     text-transform: uppercase;
     color: white;
     border-radius: .2em;
-    font-size: 1em;
+    font-size: .9em;
 }
 
 form input::placeholder{
@@ -67,7 +65,7 @@ form button {
 }
 
 form fieldset {
-    display: block;
+    display: inline-block;
     border: none;
     margin: 0px;
     margin-top: 1em;
