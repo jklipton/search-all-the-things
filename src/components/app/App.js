@@ -10,7 +10,7 @@ export default class App extends Component {
 
   state = {
     dogs: [],
-    error: null,
+    error: '',
     loading: false,
   };
 

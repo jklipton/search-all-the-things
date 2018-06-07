@@ -17,10 +17,10 @@ export default class Search extends Component {
   state = {
     dogs: [],
     breedList: [],
-    error: null,
+    error: '',
     breed: '',
-    age: null,
-    zip: null,
+    age: '',
+    zip: '',
   };
 
   UNSAFE_componentWillMount() {
